@@ -81,7 +81,7 @@ class UnLaberinto{
 					if (i==posicionY && j==posicionX) {
 						imprimePersonaje();
 					} else {
-						imprimeMapa(mapaPorImprimir[i][j]);
+						imprimeElemento(mapaPorImprimir[i][j]);
 					}
 				} else {
 					System.out.print("   ");
@@ -100,10 +100,10 @@ class UnLaberinto{
 
 	}
 
-	private static void imprimeMapa(int mosaicoDelMapa) {
+	private static void imprimeElemento(int elementoDelMapa) {
 		String[] matrizDeElementos = {" . ","[#]", "o.*","~ ~"};
 
-		System.out.print(matrizDeElementos[mosaicoDelMapa]);
+		System.out.print(matrizDeElementos[elementoDelMapa]);
 	}
 	
 }
