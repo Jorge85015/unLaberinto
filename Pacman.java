@@ -1,6 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
- 
+
 public class Pacman{
     
     public static void main(String[] args){
@@ -60,9 +60,72 @@ public class Pacman{
         do{
             horario(reloj);
             ImprimeMapa(unMapa,elPersonaje,losNPCs,reloj,turnosPastilla);
-        }while (seleccionarDireccion(unMapa,elPersonaje,losNPCs,turnosPastilla));
+        }while (seleccionarDireccion(unMapa,elPersonaje,losNPCs,turnosPastilla,losNPCs));
     }
 
+    static boolean seguirVivo(int[][]elMapa,int[][]elPersonaje,int[][]elNPC){
+        int personajeX = elPersonaje[0][0];
+        int personajeY = elPersonaje[0][1];
+
+        if((elMapa[personajeY][personajeX]==elMapa[elNPC[0][1]][elNPC[0][0]]) && estaVulnerable==true){
+            elNPC[0][1] = 19;
+            elNPC[0][0] = 12;
+            return true;
+        }
+        if(elMapa[personajeY][personajeX]==elMapa[elNPC[0][1]][elNPC[0][0]]){
+            finDelJuego(personajeX,personajeY,elNPC,elMapa);
+            return false;
+        }
+
+        if((elMapa[personajeY][personajeX]==elMapa[elNPC[1][1]][elNPC[1][0]]) && estaVulnerable==true){
+            elNPC[1][1] = 19;
+            elNPC[1][0] = 12;
+            return true;
+        }
+        if(elMapa[personajeY][personajeX]==elMapa[elNPC[1][1]][elNPC[1][0]]){
+            finDelJuego(personajeX,personajeY,elNPC,elMapa);
+            return false;
+        }
+
+        if((elMapa[personajeY][personajeX]==elMapa[elNPC[2][1]][elNPC[2][0]]) && estaVulnerable==true){
+            elNPC[2][1] = 19;
+            elNPC[2][0] = 12;
+            return true;
+        }
+        if(elMapa[personajeY][personajeX]==elMapa[elNPC[2][1]][elNPC[2][0]]){
+            finDelJuego(personajeX,personajeY,elNPC,elMapa);
+            return false;
+        }
+
+        if((elMapa[personajeY][personajeX]==elMapa[elNPC[3][1]][elNPC[3][0]]) && estaVulnerable==true){
+            elNPC[3][1] = 19;
+            elNPC[3][0] = 12;
+            return true;
+        }
+        if(elMapa[personajeY][personajeX]==elMapa[elNPC[3][1]][elNPC[3][0]]){
+            finDelJuego(personajeX,personajeY,elNPC,elMapa);
+            return false;
+        }
+        
+        return true;
+    }
+
+    static void finDelJuego(int personajeX, int personajeY, int[][]elNPC,int[][]elMapa){
+        System.out.println("Has muerto por un fastasma, juego terminado.");
+        if(elMapa[personajeY][personajeX]==elMapa[elNPC[0][1]][elNPC[0][0]]){
+            System.out.println("Posicion personaje: "+" X:["+ personajeX+"]" + " Y:["+ personajeY+"]" +" Posicion NPC: " + " X:[" + elNPC[0][0]+"]" + " Y:[" + elNPC[0][1]+"]");
+        }
+        if(elMapa[personajeY][personajeX]==elMapa[elNPC[1][1]][elNPC[1][0]]){
+            System.out.println("Posicion personaje: "+" X:["+ personajeX+"]" + " Y:["+ personajeY+"]" +" Posicion NPC: " + " X:[" + elNPC[1][0]+"]" + " Y:[" + elNPC[1][1]+"]");
+        }
+        if(elMapa[personajeY][personajeX]==elMapa[elNPC[2][1]][elNPC[2][0]]){
+            System.out.println("Posicion personaje: "+" X:["+ personajeX+"]" + " Y:["+ personajeY+"]" +" Posicion NPC: " + " X:[" + elNPC[2][0]+"]" + " Y:[" + elNPC[2][1]+"]");
+        }
+        if(elMapa[personajeY][personajeX]==elMapa[elNPC[3][1]][elNPC[3][0]]){
+            System.out.println("Posicion personaje: "+" X:["+ personajeX+"]" + " Y:["+ personajeY+"]" +" Posicion NPC: " + " X:[" + elNPC[3][0]+"]" + " Y:[" + elNPC[3][1]+"]");
+        }
+    }
+    
     static void horario(int[]reloj){
 
 
@@ -82,10 +145,20 @@ public class Pacman{
     static void turnos(int[] turnosRestantes){
         if(turnosRestantes[0]>0){
             turnosRestantes[0] = turnosRestantes[0] - 1;
+            NPCvulnerable(turnosRestantes);
         }
     }
 
-    static boolean seleccionarDireccion(int[][]elMapa,int[][]elPersonaje,int[][]losNPCs,int[]turnos){
+    static boolean NPCvulnerable(int[]turnosRestantes){
+        if(turnosRestantes[0]>0){
+            estaVulnerable = true;
+            return estaVulnerable;
+        }
+        estaVulnerable = false;
+        return estaVulnerable;
+    }
+    
+    static boolean seleccionarDireccion(int[][]elMapa,int[][]elPersonaje,int[][]losNPCs,int[]turnos,int[][]elNPC){
         Scanner entrada = new Scanner(System.in);
         String inputUsuario;
         inputUsuario = entrada.nextLine();
@@ -98,8 +171,11 @@ public class Pacman{
         if(inputUsuario.equals("f")){return false;}
 
 
-        Mover(elMapa, elPersonaje[0], direccion,turnos);
         direccionNPCs(elMapa,losNPCs);
+        Mover(elMapa, elPersonaje[0], direccion,turnos);
+        if(seguirVivo(elMapa, elPersonaje, elNPC)==false){
+            return false;
+        }
         return true;
     }
     
@@ -197,7 +273,11 @@ public class Pacman{
 	}
 
     static void ImprimeNPC(){
-        System.out.print(INICIO + GREEN_BOLD + BLACK_BACKGROUND + "^|^" + RESET);
+        if(estaVulnerable==true){
+            System.out.print(INICIO + PURPLE_BOLD + BLACK_BACKGROUND + "^|^" + RESET);
+        }else{
+            System.out.print(INICIO + GREEN_BOLD + BLACK_BACKGROUND + "^|^" + RESET);
+        }
     }
 
     static void ImprimeBorde(int LongitudH){
@@ -287,6 +367,7 @@ public class Pacman{
     } 
 
     static int rangoAntorcha = 4;
+    static boolean estaVulnerable=false;
 
     private static String INICIO = "\033[";
 	private static String RESET = "\033[0m";
