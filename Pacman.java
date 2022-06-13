@@ -6,52 +6,46 @@ public class Pacman{
     public static void main(String[] args){
         
         int[][] unMapa = {
-            {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
-            {1,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            {1,0,0,1,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,1},
-            {1,0,0,1,0,1,1,1,1,1,0,1,0,1,0,1,1,1,1,1,1,0,0,0,0,1},
-            {1,0,0,1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,1,0,1,1,0,1},
-            {1,0,1,1,0,0,1,1,1,1,0,1,0,1,0,1,0,0,0,0,1,0,1,0,0,1},
-            {1,0,1,0,0,0,1,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,1,0,0,1},
-            {1,0,1,0,4,0,1,0,0,0,0,1,0,0,0,1,1,0,0,0,4,0,1,0,1,1},
-            {1,0,1,0,0,0,1,0,0,0,1,1,1,1,1,1,1,0,1,0,0,0,1,0,1,1},
-            {1,0,1,0,1,1,1,0,1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,1},
-            {1,0,0,0,0,0,0,0,1,0,0,1,1,0,1,1,0,0,0,0,0,0,0,0,0,1},
-            {1,1,0,0,1,1,0,0,0,10,10,10,10,10,10,10,10,10,0,0,0,0,0,1,0,1},
-            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1},
-            {1,0,1,0,0,0,0,1,1,1,1,1,1,1,0,1,1,0,1,1,1,1,0,1,0,1},
-            {1,0,1,0,1,1,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,1,0,1},
-            {1,0,1,0,1,0,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,1},
-            {1,0,1,0,1,0,0,1,1,0,0,0,0,0,0,0,1,1,1,0,1,0,0,0,0,1},
-            {1,0,1,0,1,0,0,0,1,0,1,1,18,1,1,0,0,0,0,0,1,0,1,1,0,1},
-            {6,0,1,0,0,14,0,0,0,0,1,18,18,18,1,0,0,0,0,0,1,0,1,1,0,8},
-            {6,0,1,0,0,14,0,0,0,0,1,18,18,18,1,0,0,0,0,0,1,0,1,0,0,8},
-            {6,0,1,0,0,14,1,1,0,0,1,18,18,18,1,0,0,1,1,1,1,0,1,0,0,8},
-            {1,0,1,0,0,14,0,1,0,0,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,1},
-            {1,0,1,0,0,14,0,1,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,1},
-            {1,0,1,1,1,14,0,1,1,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,1},
-            {1,0,0,0,0,14,0,0,0,0,0,1,0,1,1,1,1,0,0,0,0,1,1,1,0,1},
-            {1,0,0,0,0,14,0,0,0,0,0,1,0,1,0,0,0,0,0,16,0,1,1,1,0,1},
-            {1,1,0,0,0,14,0,0,0,0,0,0,0,1,0,0,0,1,0,16,0,0,0,0,0,1},
-            {1,1,0,0,1,0,1,1,1,1,1,1,0,1,0,0,0,1,0,16,1,0,0,0,1,1},
-            {1,0,0,0,1,0,0,0,0,0,0,1,0,1,0,0,0,1,0,16,1,0,0,0,1,1},
-            {1,0,0,0,1,0,0,0,0,0,0,1,0,1,0,1,1,1,1,16,1,0,0,0,0,1},
-            {1,0,1,1,1,0,1,1,1,0,0,1,0,1,0,0,0,0,0,16,1,1,1,1,0,1},
-            {1,0,1,0,0,0,0,0,1,0,0,1,0,1,0,0,0,0,0,0,0,0,0,1,0,1},
-            {1,0,1,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1},
-            {1,0,1,0,0,0,0,0,0,0,12,12,12,12,12,12,0,1,1,1,1,1,0,1,0,1},
-            {1,0,1,0,1,1,1,1,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,0,1},
-            {1,0,1,0,1,0,0,1,0,1,1,1,1,1,1,1,0,1,0,1,0,1,0,1,0,1},
-            {1,0,1,0,1,0,0,1,0,1,0,0,0,0,0,0,0,1,0,1,0,0,4,0,0,1},
-            {1,0,0,0,0,0,0,1,0,1,0,0,0,1,1,0,0,1,0,1,0,0,0,0,0,1},
-            {1,0,0,4,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,1,1,1,0,1},
-            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-            {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
+            {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
+            {1,2,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1},
+            {1,0,1,1,1,1,0,0,0,0,0,0,0,1,0,0,0,0,1},
+            {1,0,0,0,0,1,0,1,1,0,1,1,0,0,0,0,1,0,1},
+            {1,0,1,1,0,1,0,0,1,0,0,1,0,0,0,0,1,0,1},
+            {1,0,0,1,0,1,1,0,1,0,0,1,0,1,0,0,1,0,1},
+            {1,0,0,0,0,0,0,0,0,0,0,1,1,1,0,0,1,0,1},
+            {1,0,1,0,4,0,0,0,0,0,0,0,0,0,0,1,1,0,1},
+            {1,0,1,0,0,0,1,1,1,0,0,0,0,0,0,0,0,0,1},
+            {1,0,1,0,1,0,10,10,10,10,10,0,0,1,0,0,0,0,1},
+            {1,0,1,0,1,0,0,0,0,0,0,0,0,1,4,0,1,0,1},
+            {1,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,1,0,1},
+            {1,0,1,1,1,1,1,0,0,1,1,1,0,1,0,0,1,0,1},
+            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1},
+            {1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,1,0,1},
+            {1,0,1,0,0,1,0,1,1,0,1,1,0,1,1,0,1,0,1},
+            {6,0,1,0,0,1,0,1,18,18,18,1,0,0,1,0,0,0,8},
+            {6,0,1,0,0,1,0,1,18,18,18,1,0,0,1,0,0,0,8},
+            {6,0,1,0,0,0,0,1,18,18,18,1,0,0,1,0,14,0,8},
+            {1,0,0,0,1,0,0,1,1,1,1,1,0,0,1,0,14,0,1},
+            {1,1,1,0,1,0,0,0,0,0,0,0,0,0,1,0,14,0,1},
+            {1,0,0,0,1,0,0,0,1,1,1,0,0,0,0,0,14,0,1},
+            {1,0,16,0,1,0,0,0,0,0,0,0,1,1,1,0,14,0,1},
+            {1,0,16,0,1,0,1,1,1,0,1,0,1,0,0,0,14,0,1},
+            {1,0,16,0,0,0,1,0,0,0,1,0,1,0,0,0,0,0,1},
+            {1,0,16,1,1,0,1,0,1,0,1,0,1,0,0,1,1,0,1},
+            {1,0,16,0,0,0,1,0,1,0,1,0,1,0,0,0,1,0,1},
+            {1,0,16,0,0,4,0,0,1,0,1,0,1,0,0,0,1,0,1},
+            {1,0,0,0,0,0,0,0,1,0,1,0,1,1,0,0,1,0,1},
+            {1,0,0,0,0,0,0,0,1,0,1,0,0,0,0,4,1,0,1},
+            {1,0,1,0,1,0,12,12,12,12,12,0,0,0,0,0,1,0,1},
+            {1,0,1,0,1,0,0,0,0,1,0,0,0,0,1,0,1,0,1},
+            {1,0,1,0,1,0,1,1,0,1,1,1,1,0,1,0,0,0,1},
+            {1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1},
+            {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
         };
         
         int[][]elPersonaje = {{1,1}};
 
-        int[][]losNPCs = {{12,19},{12,19},{12,19},{12,19}};
+        int[][]losNPCs = {{9,17},{9,17},{9,17},{9,17}};
 
         int[] reloj ={0,0};
 
@@ -60,72 +54,8 @@ public class Pacman{
         do{
             horario(reloj);
             ImprimeMapa(unMapa,elPersonaje,losNPCs,reloj,turnosPastilla);
-        }while (seleccionarDireccion(unMapa,elPersonaje,losNPCs,turnosPastilla,losNPCs));
+        }while (seleccionarDireccion(unMapa,elPersonaje,losNPCs,turnosPastilla));
     }
-
-    static boolean seguirVivo(int[][]elMapa,int[][]elPersonaje,int[][]elNPC){
-        int personajeX = elPersonaje[0][0];
-        int personajeY = elPersonaje[0][1];
-
-        if((elMapa[personajeY][personajeX]==elMapa[elNPC[0][1]][elNPC[0][0]]) && estaVulnerable==true){
-            elNPC[0][1] = 19;
-            elNPC[0][0] = 12;
-            return true;
-        }
-        if(elMapa[personajeY][personajeX]==elMapa[elNPC[0][1]][elNPC[0][0]]){
-            finDelJuego(personajeX,personajeY,elNPC,elMapa);
-            return false;
-        }
-
-        if((elMapa[personajeY][personajeX]==elMapa[elNPC[1][1]][elNPC[1][0]]) && estaVulnerable==true){
-            elNPC[1][1] = 19;
-            elNPC[1][0] = 12;
-            return true;
-        }
-        if(elMapa[personajeY][personajeX]==elMapa[elNPC[1][1]][elNPC[1][0]]){
-            finDelJuego(personajeX,personajeY,elNPC,elMapa);
-            return false;
-        }
-
-        if((elMapa[personajeY][personajeX]==elMapa[elNPC[2][1]][elNPC[2][0]]) && estaVulnerable==true){
-            elNPC[2][1] = 19;
-            elNPC[2][0] = 12;
-            return true;
-        }
-        if(elMapa[personajeY][personajeX]==elMapa[elNPC[2][1]][elNPC[2][0]]){
-            finDelJuego(personajeX,personajeY,elNPC,elMapa);
-            return false;
-        }
-
-        if((elMapa[personajeY][personajeX]==elMapa[elNPC[3][1]][elNPC[3][0]]) && estaVulnerable==true){
-            elNPC[3][1] = 19;
-            elNPC[3][0] = 12;
-            return true;
-        }
-        if(elMapa[personajeY][personajeX]==elMapa[elNPC[3][1]][elNPC[3][0]]){
-            finDelJuego(personajeX,personajeY,elNPC,elMapa);
-            return false;
-        }
-        
-        return true;
-    }
-
-    static void finDelJuego(int personajeX, int personajeY, int[][]elNPC,int[][]elMapa){
-        System.out.println("Has muerto por un fastasma, juego terminado.");
-        if(elMapa[personajeY][personajeX]==elMapa[elNPC[0][1]][elNPC[0][0]]){
-            System.out.println("Posicion personaje: "+" X:["+ personajeX+"]" + " Y:["+ personajeY+"]" +" Posicion NPC: " + " X:[" + elNPC[0][0]+"]" + " Y:[" + elNPC[0][1]+"]");
-        }
-        if(elMapa[personajeY][personajeX]==elMapa[elNPC[1][1]][elNPC[1][0]]){
-            System.out.println("Posicion personaje: "+" X:["+ personajeX+"]" + " Y:["+ personajeY+"]" +" Posicion NPC: " + " X:[" + elNPC[1][0]+"]" + " Y:[" + elNPC[1][1]+"]");
-        }
-        if(elMapa[personajeY][personajeX]==elMapa[elNPC[2][1]][elNPC[2][0]]){
-            System.out.println("Posicion personaje: "+" X:["+ personajeX+"]" + " Y:["+ personajeY+"]" +" Posicion NPC: " + " X:[" + elNPC[2][0]+"]" + " Y:[" + elNPC[2][1]+"]");
-        }
-        if(elMapa[personajeY][personajeX]==elMapa[elNPC[3][1]][elNPC[3][0]]){
-            System.out.println("Posicion personaje: "+" X:["+ personajeX+"]" + " Y:["+ personajeY+"]" +" Posicion NPC: " + " X:[" + elNPC[3][0]+"]" + " Y:[" + elNPC[3][1]+"]");
-        }
-    }
-    
     static void horario(int[]reloj){
 
 
@@ -140,6 +70,73 @@ public class Pacman{
 			reloj[1]=0;
 		}
         rangoAntorcha = alcanceAntorcha(reloj);
+    }
+    
+    static boolean seleccionarDireccion(int[][]elMapa,int[][]elPersonaje,int[][]losNPCs,int[]turnos){
+        Scanner entrada = new Scanner(System.in);
+        String inputUsuario;
+        inputUsuario = entrada.nextLine();
+        char direccion=' ';
+
+        if(inputUsuario.equals("w")) {direccion='N';} else
+        if(inputUsuario.equals("s")) {direccion='S';} else
+        if(inputUsuario.equals("a")) {direccion='E';} else
+        if(inputUsuario.equals("d")) {direccion='O';} else
+        if(inputUsuario.equals("f")){return false;}
+
+
+        direccionNPCs(elMapa,losNPCs);
+        Mover(elMapa, elPersonaje[0], direccion,turnos);
+        if(seguirVivo(elPersonaje, losNPCs)==false){
+            return false;
+        }
+        return true;
+    }    
+    
+    static boolean seguirVivo(int[][]elPersonaje,int[][]elNPC){
+        int personajeX = elPersonaje[0][0];
+        int personajeY = elPersonaje[0][1];
+
+        if((personajeY==elNPC[0][1] && personajeX==elNPC[0][0]) && estaVulnerable==true){
+            elNPC[0][1] = 17;
+            elNPC[0][0] = 9;
+            return true;
+        }
+        else if(personajeY==elNPC[0][1] && personajeX==elNPC[0][0]){
+            finDelJuego(personajeX,personajeY,elNPC);
+            return false;
+        }
+
+        if((personajeY==elNPC[1][1] && personajeX==elNPC[1][0]) && estaVulnerable==true){
+            elNPC[1][1] = 17;
+            elNPC[1][0] = 9;
+            return true;
+        }
+        else if(personajeY==elNPC[1][1] && personajeX==elNPC[1][0]){
+            finDelJuego(personajeX,personajeY,elNPC);
+            return false;
+        }
+        if((personajeY==elNPC[2][1] && personajeX==elNPC[2][0]) && estaVulnerable==true){
+            elNPC[2][1] = 17;
+            elNPC[2][0] = 9;
+            return true;
+        }
+        else if(personajeY==elNPC[2][1] && personajeX==elNPC[2][0]){
+            finDelJuego(personajeX,personajeY,elNPC);
+            return false;
+        }
+
+        if((personajeY==elNPC[3][1] && personajeX==elNPC[3][0]) && estaVulnerable==true){
+            elNPC[3][1] = 17;
+            elNPC[3][0] = 9;
+            return true;
+        }
+        else if(personajeY==elNPC[3][1] && personajeX==elNPC[3][0]){
+            finDelJuego(personajeX,personajeY,elNPC);
+            return false;
+        }
+        
+        return true;
     }
 
     static void turnos(int[] turnosRestantes){
@@ -157,28 +154,7 @@ public class Pacman{
         estaVulnerable = false;
         return estaVulnerable;
     }
-    
-    static boolean seleccionarDireccion(int[][]elMapa,int[][]elPersonaje,int[][]losNPCs,int[]turnos,int[][]elNPC){
-        Scanner entrada = new Scanner(System.in);
-        String inputUsuario;
-        inputUsuario = entrada.nextLine();
-        char direccion=' ';
 
-        if(inputUsuario.equals("w")) {direccion='N';} else
-        if(inputUsuario.equals("s")) {direccion='S';} else
-        if(inputUsuario.equals("a")) {direccion='E';} else
-        if(inputUsuario.equals("d")) {direccion='O';} else
-        if(inputUsuario.equals("f")){return false;}
-
-
-        direccionNPCs(elMapa,losNPCs);
-        Mover(elMapa, elPersonaje[0], direccion,turnos);
-        if(seguirVivo(elMapa, elPersonaje, elNPC)==false){
-            return false;
-        }
-        return true;
-    }
-    
     static void Mover(int[][] elMapa, int[]elPersonaje,char direccion,int[]turnos){
 
         int posicionY = elPersonaje[1];
@@ -191,8 +167,8 @@ public class Pacman{
         if(direccion == 'O' && (elMapa[posicionY][posicionX+1]%2==0)){posicionX = posicionX + 1;}
 
 //--------------Teletrasporte--------------
-        if(elMapa[posicionY][posicionX]==8){posicionX=0;posicionY=19;}else
-        if(elMapa[posicionY][posicionX]==6){posicionX=25;posicionY=19;}
+        if(elMapa[posicionY][posicionX]==8){posicionX=0;posicionY=17;}else
+        if(elMapa[posicionY][posicionX]==6){posicionX=18;posicionY=17;}
 
 //--------------Bandas Transportadoras--------------
         if(elMapa[posicionY][posicionX]==10){posicionX=posicionX+1;}else
@@ -206,7 +182,7 @@ public class Pacman{
         }
 //--------------Turnos de pastilla-----------
         if(elMapa[posicionY][posicionX]==4){
-           turnosRestantes = 16;
+           turnosRestantes = 26;
            elMapa[posicionY][posicionX]=2;
         }
         turnos[0] = turnosRestantes;
@@ -214,10 +190,6 @@ public class Pacman{
 
         elPersonaje[1] = posicionY;
         elPersonaje[0] = posicionX;
-    }
-    
-    static void ImprimePersonaje(){
-        System.out.print(INICIO + RED_BOLD + BLACK_BACKGROUND + "\\0/" + RESET);
     }
 
     static void direccionNPCs(int[][]elMapa,int[][]losNPCs){
@@ -257,6 +229,9 @@ public class Pacman{
             elMapa[posicionYNPC][posicionXNPC]=2;
         }
 
+        if(elMapa[posicionYNPC][posicionXNPC]==8){posicionXNPC=0;posicionYNPC=17;}else
+        if(elMapa[posicionYNPC][posicionXNPC]==6){posicionXNPC=18;posicionYNPC=17;}
+
         losNPCs[1] = posicionYNPC;
         losNPCs[0] = posicionXNPC;
         
@@ -271,14 +246,6 @@ public class Pacman{
 		}
 		return false;
 	}
-
-    static void ImprimeNPC(){
-        if(estaVulnerable==true){
-            System.out.print(INICIO + PURPLE_BOLD + BLACK_BACKGROUND + "^|^" + RESET);
-        }else{
-            System.out.print(INICIO + GREEN_BOLD + BLACK_BACKGROUND + "^|^" + RESET);
-        }
-    }
 
     static void ImprimeBorde(int LongitudH){
         for(int j=0;j<LongitudH;j++){
@@ -316,7 +283,19 @@ public class Pacman{
         System.out.println("Son las ["+reloj[0]+"]:["+reloj[1]+"]" + " horas");
         System.out.println("Turnos restantes: ["+turnos[0]+"]");
     }
-
+    
+    static void ImprimePersonaje(){
+        System.out.print(INICIO + RED_BOLD + BLACK_BACKGROUND + "\\0/" + RESET);
+    }
+    
+    static void ImprimeNPC(){
+        if(estaVulnerable==true){
+            System.out.print(INICIO + PURPLE_BOLD + BLACK_BACKGROUND + "^|^" + RESET);
+        }else{
+            System.out.print(INICIO + GREEN_BOLD + BLACK_BACKGROUND + "^|^" + RESET);
+        }
+    }
+    
     static void ImprimeElemento(int i){
         String[] Elementos = {
             INICIO + YELLOW_BOLD + BLACK_BACKGROUND + " * " + RESET,
@@ -337,35 +316,51 @@ public class Pacman{
             "",
             INICIO + CYAN_BOLD + BLACK_BACKGROUND +"vvv" + RESET,
             "",
-            INICIO + WHITE_BOLD + BLACK_BACKGROUND + "~~~"
+            INICIO + WHITE_BOLD + BLACK_BACKGROUND + "~~~" + RESET
         };
         System.out.print(Elementos[i]);
+    }
+    
+    static void finDelJuego(int personajeX, int personajeY, int[][]elNPC){
+        System.out.println("Has muerto por un fastasma, juego terminado.");
+        if(personajeY==elNPC[0][1] && personajeX==elNPC[0][0]){
+            System.out.println("Posicion personaje: "+" X:["+ personajeX+"]" + " Y:["+ personajeY+"]" +" Posicion NPC: " + " X:[" + elNPC[0][0]+"]" + " Y:[" + elNPC[0][1]+"]");
+        }
+        if(personajeY==elNPC[1][1] && personajeX==elNPC[1][0]){
+            System.out.println("Posicion personaje: "+" X:["+ personajeX+"]" + " Y:["+ personajeY+"]" +" Posicion NPC: " + " X:[" + elNPC[1][0]+"]" + " Y:[" + elNPC[1][1]+"]");
+        }
+        if(personajeY==elNPC[2][1] && personajeX==elNPC[2][0]){
+            System.out.println("Posicion personaje: "+" X:["+ personajeX+"]" + " Y:["+ personajeY+"]" +" Posicion NPC: " + " X:[" + elNPC[2][0]+"]" + " Y:[" + elNPC[2][1]+"]");
+        }
+        if(personajeY==elNPC[3][1] && personajeX==elNPC[3][0]){
+            System.out.println("Posicion personaje: "+" X:["+ personajeX+"]" + " Y:["+ personajeY+"]" +" Posicion NPC: " + " X:[" + elNPC[3][0]+"]" + " Y:[" + elNPC[3][1]+"]");
+        }
     }
 
     static boolean puedoVer(int i, int j, int[][] elPersonaje){
         return Math.pow(elPersonaje[0][0]-j,2) + Math.pow(elPersonaje[0][1]-i,2)<=Math.pow(rangoAntorcha,2);
     }
 
-	static void limpiaPantalla() {
+    static int alcanceAntorcha(int[]reloj){
+        
+        // int hora, minuto;
+		// double minutos;
+		// hora = reloj[0];
+		// minuto = reloj[1];
+		// minutos = hora*60+minuto;
+
+		// if (hora<4||hora>=21){return 3;}
+		// if (hora>=4 && hora <8) {return ((int)(3.0+((32.0/240.0)*(minutos-240.0))));}
+		// if (hora>=17 && hora <21) {return ((int)(35.0+((-32.0/240.0)*(minutos-1030.0))));}
+		return 60;
+    } 
+	
+    static void limpiaPantalla() {
 
 		System.out.print("\033[H\033[2J");
 		System.out.flush();
 	}
-
-    static int alcanceAntorcha(int[]reloj){
-        
-        int hora, minuto;
-		double minutos;
-		hora = reloj[0];
-		minuto = reloj[1];
-		minutos = hora*60+minuto;
-
-		if (hora<4||hora>=21){return 3;}
-		if (hora>=4 && hora <8) {return ((int)(3.0+((32.0/240.0)*(minutos-240.0))));}
-		if (hora>=17 && hora <21) {return ((int)(35.0+((-32.0/240.0)*(minutos-1030.0))));}
-		return 60;
-    } 
-
+    
     static int rangoAntorcha = 4;
     static boolean estaVulnerable=false;
 
