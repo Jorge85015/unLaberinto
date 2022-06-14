@@ -54,6 +54,7 @@ public class Pacman{
         do{
             horario(reloj);
             ImprimeMapa(unMapa,elPersonaje,losNPCs,reloj,turnosPastilla);
+            monedasRestantes(unMapa);
         }while (seleccionarDireccion(unMapa,elPersonaje,losNPCs,turnosPastilla));
     }
     static void horario(int[]reloj){
@@ -73,6 +74,7 @@ public class Pacman{
     }
     
     static boolean seleccionarDireccion(int[][]elMapa,int[][]elPersonaje,int[][]losNPCs,int[]turnos){
+
         Scanner entrada = new Scanner(System.in);
         String inputUsuario;
         inputUsuario = entrada.nextLine();
@@ -87,74 +89,57 @@ public class Pacman{
 
         direccionNPCs(elMapa,losNPCs);
         Mover(elMapa, elPersonaje[0], direccion,turnos);
-        if(seguirVivo(elPersonaje, losNPCs)==false){
+        if(seguirVivo(elPersonaje, losNPCs)==false || hayMonedas==false){
             return false;
         }
         return true;
     }    
     
-    static boolean seguirVivo(int[][]elPersonaje,int[][]elNPC){
-        int personajeX = elPersonaje[0][0];
-        int personajeY = elPersonaje[0][1];
+    static void direccionNPCs(int[][]elMapa,int[][]losNPCs){
+        char[] direcciones = {'N','S','E','O'};
+        char direccionSeleccionada = ' ';
 
-        if((personajeY==elNPC[0][1] && personajeX==elNPC[0][0]) && estaVulnerable==true){
-            elNPC[0][1] = 17;
-            elNPC[0][0] = 9;
-            return true;
-        }
-        else if(personajeY==elNPC[0][1] && personajeX==elNPC[0][0]){
-            finDelJuego(personajeX,personajeY,elNPC);
-            return false;
+        for(int unNPC=0;unNPC < losNPCs.length;unNPC++){
+            Random random = new Random();
+            direccionSeleccionada = direcciones[random.nextInt(4)];
+            MoverNPC(elMapa,losNPCs[unNPC],direccionSeleccionada);
         }
 
-        if((personajeY==elNPC[1][1] && personajeX==elNPC[1][0]) && estaVulnerable==true){
-            elNPC[1][1] = 17;
-            elNPC[1][0] = 9;
-            return true;
-        }
-        else if(personajeY==elNPC[1][1] && personajeX==elNPC[1][0]){
-            finDelJuego(personajeX,personajeY,elNPC);
-            return false;
-        }
-        if((personajeY==elNPC[2][1] && personajeX==elNPC[2][0]) && estaVulnerable==true){
-            elNPC[2][1] = 17;
-            elNPC[2][0] = 9;
-            return true;
-        }
-        else if(personajeY==elNPC[2][1] && personajeX==elNPC[2][0]){
-            finDelJuego(personajeX,personajeY,elNPC);
-            return false;
-        }
+    }   
 
-        if((personajeY==elNPC[3][1] && personajeX==elNPC[3][0]) && estaVulnerable==true){
-            elNPC[3][1] = 17;
-            elNPC[3][0] = 9;
-            return true;
-        }
-        else if(personajeY==elNPC[3][1] && personajeX==elNPC[3][0]){
-            finDelJuego(personajeX,personajeY,elNPC);
-            return false;
-        }
+    static void MoverNPC(int[][] elMapa, int[]losNPCs,char direccionSeleccionada){
+
+        int posicionYNPC = losNPCs[1];
+        int posicionXNPC = losNPCs[0];
+
+        if(direccionSeleccionada == 'N' && (elMapa[posicionYNPC-1][posicionXNPC]%2==0)){posicionYNPC = posicionYNPC - 1;}else
+        if(direccionSeleccionada == 'S' && (elMapa[posicionYNPC+1][posicionXNPC]%2==0)){posicionYNPC = posicionYNPC + 1;}else
+        if(direccionSeleccionada == 'E' && (elMapa[posicionYNPC][posicionXNPC-1]%2==0)){posicionXNPC = posicionXNPC - 1;}else
+        if(direccionSeleccionada == 'O' && (elMapa[posicionYNPC][posicionXNPC+1]%2==0)){posicionXNPC = posicionXNPC + 1;}
+
+//--------------Bandas Transportadoras--------------
+        if(elMapa[posicionYNPC][posicionXNPC]==10){posicionXNPC=posicionXNPC+1;}else
+        if(elMapa[posicionYNPC][posicionXNPC]==12){posicionXNPC=posicionXNPC-1;}else
+        if(elMapa[posicionYNPC][posicionXNPC]==14){posicionYNPC=posicionYNPC-1;}else
+        if(elMapa[posicionYNPC][posicionXNPC]==16){posicionYNPC=posicionYNPC+1;}
         
-        return true;
-    }
 
-    static void turnos(int[] turnosRestantes){
-        if(turnosRestantes[0]>0){
-            turnosRestantes[0] = turnosRestantes[0] - 1;
-            NPCvulnerable(turnosRestantes);
+        if(elMapa[posicionYNPC][posicionXNPC]==0){
+            elMapa[posicionYNPC][posicionXNPC]=0;
         }
-    }
 
-    static boolean NPCvulnerable(int[]turnosRestantes){
-        if(turnosRestantes[0]>0){
-            estaVulnerable = true;
-            return estaVulnerable;
+        if(elMapa[posicionYNPC][posicionXNPC]==2){
+            elMapa[posicionYNPC][posicionXNPC]=2;
         }
-        estaVulnerable = false;
-        return estaVulnerable;
-    }
 
+        if(elMapa[posicionYNPC][posicionXNPC]==8){posicionXNPC= posicionXNPC - 1;}else
+        if(elMapa[posicionYNPC][posicionXNPC]==6){posicionXNPC= posicionXNPC + 1;}
+
+        losNPCs[1] = posicionYNPC;
+        losNPCs[0] = posicionXNPC;
+        
+    }
+    
     static void Mover(int[][] elMapa, int[]elPersonaje,char direccion,int[]turnos){
 
         int posicionY = elPersonaje[1];
@@ -182,76 +167,94 @@ public class Pacman{
         }
 //--------------Turnos de pastilla-----------
         if(elMapa[posicionY][posicionX]==4){
-           turnosRestantes = 26;
+           turnosRestantes = 16;
            elMapa[posicionY][posicionX]=2;
         }
         turnos[0] = turnosRestantes;
-        turnos(turnos);
+        restarTurnos(turnos);
 
         elPersonaje[1] = posicionY;
         elPersonaje[0] = posicionX;
-    }
+    } 
 
-    static void direccionNPCs(int[][]elMapa,int[][]losNPCs){
-        char[] direcciones = {'N','S','E','O'};
-        char direccionSeleccionada = ' ';
-
-        for(int unNPC=0;unNPC < losNPCs.length;unNPC++){
-            Random random = new Random();
-            direccionSeleccionada = direcciones[random.nextInt(4)];
-            MoverNPC(elMapa,losNPCs[unNPC],direccionSeleccionada);
+    static void restarTurnos(int[] turnosRestantes){
+        if(turnosRestantes[0]>0){
+            turnosRestantes[0] = turnosRestantes[0] - 1;
+            NPCvulnerable(turnosRestantes);
         }
-
-    }  
+    }    
     
-    static void MoverNPC(int[][] elMapa, int[]losNPCs,char direccionSeleccionada){
+    static boolean NPCvulnerable(int[]turnosRestantes){
+        if(turnosRestantes[0]>0){
+            estaVulnerable = true;
+            return estaVulnerable;
+        }
+        estaVulnerable = false;
+        return estaVulnerable;
+    }    
 
-        int posicionYNPC = losNPCs[1];
-        int posicionXNPC = losNPCs[0];
+    static boolean seguirVivo(int[][]elPersonaje,int[][]elNPC){
+        int personajeX = elPersonaje[0][0];
+        int personajeY = elPersonaje[0][1];
 
-        if(direccionSeleccionada == 'N' && (elMapa[posicionYNPC-1][posicionXNPC]%2==0)){posicionYNPC = posicionYNPC - 1;}else
-        if(direccionSeleccionada == 'S' && (elMapa[posicionYNPC+1][posicionXNPC]%2==0)){posicionYNPC = posicionYNPC + 1;}else
-        if(direccionSeleccionada == 'E' && (elMapa[posicionYNPC][posicionXNPC-1]%2==0)){posicionXNPC = posicionXNPC - 1;}else
-        if(direccionSeleccionada == 'O' && (elMapa[posicionYNPC][posicionXNPC+1]%2==0)){posicionXNPC = posicionXNPC + 1;}
+        if((personajeY==elNPC[0][1] && personajeX==elNPC[0][0]) && estaVulnerable==true){
+            elNPC[0][1] = 17;
+            elNPC[0][0] = 9;
+            return true;
+        }
+        else if(personajeY==elNPC[0][1] && personajeX==elNPC[0][0]){
+            datosDeMuerte(personajeX,personajeY,elNPC);
+            return false;
+        }
 
-//--------------Bandas Transportadoras--------------
-        if(elMapa[posicionYNPC][posicionXNPC]==10){posicionXNPC=posicionXNPC+1;}else
-        if(elMapa[posicionYNPC][posicionXNPC]==12){posicionXNPC=posicionXNPC-1;}else
-        if(elMapa[posicionYNPC][posicionXNPC]==14){posicionYNPC=posicionYNPC-1;}else
-        if(elMapa[posicionYNPC][posicionXNPC]==16){posicionYNPC=posicionYNPC+1;}
+        if((personajeY==elNPC[1][1] && personajeX==elNPC[1][0]) && estaVulnerable==true){
+            elNPC[1][1] = 17;
+            elNPC[1][0] = 9;
+            return true;
+        }
+        else if(personajeY==elNPC[1][1] && personajeX==elNPC[1][0]){
+            datosDeMuerte(personajeX,personajeY,elNPC);
+            return false;
+        }
+        if((personajeY==elNPC[2][1] && personajeX==elNPC[2][0]) && estaVulnerable==true){
+            elNPC[2][1] = 17;
+            elNPC[2][0] = 9;
+            return true;
+        }
+        else if(personajeY==elNPC[2][1] && personajeX==elNPC[2][0]){
+            datosDeMuerte(personajeX,personajeY,elNPC);
+            return false;
+        }
+
+        if((personajeY==elNPC[3][1] && personajeX==elNPC[3][0]) && estaVulnerable==true){
+            elNPC[3][1] = 17;
+            elNPC[3][0] = 9;
+            return true;
+        }
+        else if(personajeY==elNPC[3][1] && personajeX==elNPC[3][0]){
+            datosDeMuerte(personajeX,personajeY,elNPC);
+            return false;
+        }
         
+        return true;
+    }    
 
-        if(elMapa[posicionYNPC][posicionXNPC]==0){
-            elMapa[posicionYNPC][posicionXNPC]=0;
+    static void monedasRestantes(int[][]elMapa){
+        int monedasRestantes;
+        monedasRestantes=0;
+        for(int i=0;i<elMapa.length;i++){
+            for(int j=0;j<elMapa[i].length;j++){
+                if(elMapa[i][j]==0 || elMapa[i][j]==4){
+                    monedasRestantes = monedasRestantes + 1;     
+                }
+            }
         }
 
-        if(elMapa[posicionYNPC][posicionXNPC]==2){
-            elMapa[posicionYNPC][posicionXNPC]=2;
+        System.out.println("Monedas restantes: " + "[" + monedasRestantes + "]");
+        if(monedasRestantes==0){
+            System.out.println("Felicidades, has completado el juego!!");
+            hayMonedas=false;
         }
-
-        if(elMapa[posicionYNPC][posicionXNPC]==8){posicionXNPC=0;posicionYNPC=17;}else
-        if(elMapa[posicionYNPC][posicionXNPC]==6){posicionXNPC=18;posicionYNPC=17;}
-
-        losNPCs[1] = posicionYNPC;
-        losNPCs[0] = posicionXNPC;
-        
-    }
-
-    static boolean hayNPC(int[][] losNPCs, int i, int j) {
-
-		for (int unNPC = 0; unNPC < losNPCs.length; unNPC++) {
-			if (losNPCs[unNPC][0] == j && losNPCs[unNPC][1] == i) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-    static void ImprimeBorde(int LongitudH){
-        for(int j=0;j<LongitudH;j++){
-            System.out.print("---");
-        }
-        System.out.println();
     }
 
     static void ImprimeMapa(int[][] MapaPorImprimir, int[][]elPersonaje,int[][]losNPCs,int[]reloj,int[] turnos){
@@ -283,11 +286,52 @@ public class Pacman{
         System.out.println("Son las ["+reloj[0]+"]:["+reloj[1]+"]" + " horas");
         System.out.println("Turnos restantes: ["+turnos[0]+"]");
     }
-    
+
+    static void limpiaPantalla() {
+
+		System.out.print("\033[H\033[2J");
+		System.out.flush();
+	}
+
+    static void ImprimeBorde(int LongitudH){
+        for(int j=0;j<LongitudH;j++){
+            System.out.print("---");
+        }
+        System.out.println();
+    }
+
+    static boolean puedoVer(int i, int j, int[][] elPersonaje){
+        return Math.pow(elPersonaje[0][0]-j,2) + Math.pow(elPersonaje[0][1]-i,2)<=Math.pow(rangoAntorcha,2);
+    }
+
+    static int alcanceAntorcha(int[]reloj){
+        
+        // int hora, minuto;
+		// double minutos;
+		// hora = reloj[0];
+		// minuto = reloj[1];
+		// minutos = hora*60+minuto;
+
+		// if (hora<4||hora>=21){return 3;}
+		// if (hora>=4 && hora <8) {return ((int)(3.0+((32.0/240.0)*(minutos-240.0))));}
+		// if (hora>=17 && hora <21) {return ((int)(35.0+((-32.0/240.0)*(minutos-1030.0))));}
+		return 60;
+    } 
+ 
     static void ImprimePersonaje(){
         System.out.print(INICIO + RED_BOLD + BLACK_BACKGROUND + "\\0/" + RESET);
-    }
-    
+    }    
+
+    static boolean hayNPC(int[][] losNPCs, int i, int j) {
+
+		for (int unNPC = 0; unNPC < losNPCs.length; unNPC++) {
+			if (losNPCs[unNPC][0] == j && losNPCs[unNPC][1] == i) {
+				return true;
+			}
+		}
+		return false;
+	}
+
     static void ImprimeNPC(){
         if(estaVulnerable==true){
             System.out.print(INICIO + PURPLE_BOLD + BLACK_BACKGROUND + "^|^" + RESET);
@@ -295,7 +339,7 @@ public class Pacman{
             System.out.print(INICIO + GREEN_BOLD + BLACK_BACKGROUND + "^|^" + RESET);
         }
     }
-    
+
     static void ImprimeElemento(int i){
         String[] Elementos = {
             INICIO + YELLOW_BOLD + BLACK_BACKGROUND + " * " + RESET,
@@ -320,8 +364,8 @@ public class Pacman{
         };
         System.out.print(Elementos[i]);
     }
-    
-    static void finDelJuego(int personajeX, int personajeY, int[][]elNPC){
+     
+    static void datosDeMuerte(int personajeX, int personajeY, int[][]elNPC){
         System.out.println("Has muerto por un fastasma, juego terminado.");
         if(personajeY==elNPC[0][1] && personajeX==elNPC[0][0]){
             System.out.println("Posicion personaje: "+" X:["+ personajeX+"]" + " Y:["+ personajeY+"]" +" Posicion NPC: " + " X:[" + elNPC[0][0]+"]" + " Y:[" + elNPC[0][1]+"]");
@@ -337,32 +381,9 @@ public class Pacman{
         }
     }
 
-    static boolean puedoVer(int i, int j, int[][] elPersonaje){
-        return Math.pow(elPersonaje[0][0]-j,2) + Math.pow(elPersonaje[0][1]-i,2)<=Math.pow(rangoAntorcha,2);
-    }
-
-    static int alcanceAntorcha(int[]reloj){
-        
-        // int hora, minuto;
-		// double minutos;
-		// hora = reloj[0];
-		// minuto = reloj[1];
-		// minutos = hora*60+minuto;
-
-		// if (hora<4||hora>=21){return 3;}
-		// if (hora>=4 && hora <8) {return ((int)(3.0+((32.0/240.0)*(minutos-240.0))));}
-		// if (hora>=17 && hora <21) {return ((int)(35.0+((-32.0/240.0)*(minutos-1030.0))));}
-		return 60;
-    } 
-	
-    static void limpiaPantalla() {
-
-		System.out.print("\033[H\033[2J");
-		System.out.flush();
-	}
-    
     static int rangoAntorcha = 4;
     static boolean estaVulnerable=false;
+    static boolean hayMonedas=true;
 
     private static String INICIO = "\033[";
 	private static String RESET = "\033[0m";
