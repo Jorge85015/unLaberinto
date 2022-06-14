@@ -306,15 +306,15 @@ public class Pacman{
 
     static int alcanceAntorcha(int[]reloj){
         
-        // int hora, minuto;
-		// double minutos;
-		// hora = reloj[0];
-		// minuto = reloj[1];
-		// minutos = hora*60+minuto;
+        int hora, minuto;
+		double minutos;
+		hora = reloj[0];
+		minuto = reloj[1];
+		minutos = hora*60+minuto;
 
-		// if (hora<4||hora>=21){return 3;}
-		// if (hora>=4 && hora <8) {return ((int)(3.0+((32.0/240.0)*(minutos-240.0))));}
-		// if (hora>=17 && hora <21) {return ((int)(35.0+((-32.0/240.0)*(minutos-1030.0))));}
+		if (hora<4||hora>=21){return 3;}
+		if (hora>=4 && hora <8) {return ((int)(3.0+((32.0/240.0)*(minutos-240.0))));}
+		if (hora>=17 && hora <21) {return ((int)(35.0+((-32.0/240.0)*(minutos-1030.0))));}
 		return 60;
     } 
  
